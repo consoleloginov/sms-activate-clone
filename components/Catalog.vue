@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import CatalogCountries from './CatalogCountries.vue'
+
   import response from '@/heap/getAllServicesDesktop-response-example.json'
 
   const items = response.data.map((item) => {
@@ -8,19 +10,43 @@
     }
     return item
   })
+
+  type State = {
+    activeItemId: string | null
+  }
+
+  const state = reactive<State>({
+    activeItemId: null
+  })
+
+  const handleClickOnItem = (itemId: string) => {
+    if (itemId !== state.activeItemId) {
+      state.activeItemId = itemId
+    } else {
+      state.activeItemId = null
+    }
+  }
 </script>
 
 <template>
   <div class="Catalog">
-    <div class="Catalog-item" v-for="item of items" v-bind:key="item.shortName">
-      <img v-bind:src="`https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/${item.shortName}0.webp`" />
-      <div class="Catalog-item-name">{{item.name }}</div>
-      <div v-if="item.forward" class="Catalog-item-forward">+переадресация</div>
-      <div class="Catalog-item-totalCount">{{ item.totalCount }} шт</div>
-      <div class="Catalog-item-minFreePrice">
-        от
-        <span class="font-semibold">{{ item.minFreePrice }} ₽</span>
+    <div v-for="item of items" v-bind:key="item.shortName">
+      <div
+        class="Catalog-item"
+        v-bind:class="{active: state.activeItemId === item.shortName}"
+        v-on:click="handleClickOnItem(item.shortName)"
+      >
+        <img v-bind:src="`https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/${item.shortName}0.webp`" />
+        <div class="Catalog-item-name">{{item.name }}</div>
+        <div v-if="item.forward" class="Catalog-item-forward">+переадресация</div>
+        <div class="Catalog-item-totalCount">{{ item.totalCount }} шт</div>
+        <div class="Catalog-item-minFreePrice">
+          от
+          <span class="font-semibold">{{ item.minFreePrice }} ₽</span>
+        </div>
       </div>
+
+      <CatalogCountries v-if="state.activeItemId === item.shortName"/>
     </div>
   </div>
 </template>
@@ -41,6 +67,14 @@
 
     &:nth-child(even) {
       @apply bg-slate-100;
+    }
+
+    &.active {
+      @apply bg-sky-900 text-white;
+
+      .Catalog-item-totalCount {
+        @apply text-white;
+      }
     }
   }
 
