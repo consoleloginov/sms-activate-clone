@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "nuxt": "^3.6.2"
+  }
+}
