@@ -1,9 +1,7 @@
 <script setup lang="ts">
   import CatalogCountryItem from './CatalogCountryItem.vue'
 
-  import response from '@/heap/countriesStackRender-response-example.json'
-
-  const items = response.data.cards
+  const {data: items} = await useFetch('/api/catalog/countries')
 </script>
 
 <template>

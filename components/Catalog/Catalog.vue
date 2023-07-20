@@ -2,15 +2,7 @@
   import CatalogCountries from './CatalogCountries.vue'
   import CatalogItem from './CatalogItem.vue'
 
-  import response from '@/heap/getAllServicesDesktop-response-example.json'
-
-  const items = response.data.map((item) => {
-    const substr = '<small>+переадресация</small>'
-    if (item.forward) {
-      item.name = item.name.slice(0, -substr.length)
-    }
-    return item
-  })
+  const {data: items} = await useFetch('/api/catalog/items')
 
   type State = {
     selectedItemId: string | null
