@@ -2,34 +2,42 @@
   import CatalogCountries from './CatalogCountries.vue'
   import CatalogItem from './CatalogItem.vue'
 
-  const {data: items} = await useFetch('/api/catalog/items')
+  const items = $ref(await $fetch('/api/catalog/items'))
 
-  type State = {
-    selectedItemId: string | null
+  const loadMoreItems = async (offset: number) => {
+    const moreItems = await $fetch('/api/catalog/items', {
+      query: {offset}
+    })
+
+    items.push(...moreItems)
   }
 
-  const state = reactive<State>({
-    selectedItemId: null
+  const scrollContainer = ref<HTMLElement | null>(null)
+
+  useInfiniteScroll(scrollContainer, async () => {
+    await loadMoreItems(items.length)
   })
 
+  let selectedItemId = $ref<string | null>(null)
+
   const handleClickOnItem = (itemId: string) => {
-    if (itemId !== state.selectedItemId) {
-      state.selectedItemId = itemId
+    if (itemId !== selectedItemId) {
+      selectedItemId = itemId
     } else {
-      state.selectedItemId = null
+      selectedItemId = null
     }
   }
 </script>
 
 <template>
-  <div class="Catalog">
+  <div class="Catalog" ref="scrollContainer">
     <div v-for="item of items" v-bind:key="item.shortName">
       <CatalogItem
         v-bind="item"
-        v-bind:selected="state.selectedItemId === item.shortName"
+        v-bind:selected="selectedItemId === item.shortName"
         v-on:click="handleClickOnItem(item.shortName)"
       />
-      <CatalogCountries v-if="state.selectedItemId === item.shortName" />
+      <CatalogCountries v-if="selectedItemId === item.shortName" />
     </div>
   </div>
 </template>
@@ -37,5 +45,7 @@
 <style scoped>
   .Catalog {
     width: 320px;
+    max-height: 100vh;
+    overflow: scroll;
   }
 </style>
