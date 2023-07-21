@@ -4,6 +4,8 @@
 
   const items = $ref(await $fetch('/api/catalog/items'))
 
+  type Item = typeof items[0]
+
   const loadMoreItems = async (offset: number) => {
     const moreItems = await $fetch('/api/catalog/items', {
       query: {offset}
@@ -18,33 +20,46 @@
     await loadMoreItems(items.length)
   })
 
-  let selectedItemId = $ref<string | null>(null)
+  let selectedItem = $ref<Item | null>(null)
 
-  const handleClickOnItem = (itemId: string) => {
-    if (itemId !== selectedItemId) {
-      selectedItemId = itemId
+  const handleClickOnItem = (item: Item) => {
+    if (!selectedItem) {
+      selectedItem = item
     } else {
-      selectedItemId = null
+      selectedItem = null
     }
   }
 </script>
 
 <template>
-  <div class="Catalog" ref="scrollContainer">
-    <div v-for="item of items" v-bind:key="item.shortName">
-      <CatalogItem
-        v-bind="item"
-        v-bind:selected="selectedItemId === item.shortName"
-        v-on:click="handleClickOnItem(item.shortName)"
-      />
-      <CatalogCountries v-if="selectedItemId === item.shortName" />
-    </div>
+  <div class="Catalog">
+    <template v-if="!selectedItem">
+      <div class="Catalog-scrollContainer" ref="scrollContainer">
+        <CatalogItem
+          v-for="item of items"
+          v-bind:key="item.shortName"
+          v-bind="item"
+          v-on:click="handleClickOnItem(item)"
+        />
+      </div>
+    </template>
+
+    <template v-else>
+      <div>
+        <CatalogItem selected v-bind="selectedItem" />
+        <CatalogCountries />
+      </div>
+    </template>
   </div>
 </template>
 
 <style scoped>
   .Catalog {
     width: 320px;
+    max-height: 100vh;
+  }
+
+  .Catalog-scrollContainer {
     max-height: 100vh;
     overflow: scroll;
   }

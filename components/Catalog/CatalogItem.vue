@@ -1,6 +1,6 @@
 <script setup lang="ts">
   type Props = {
-    selected: boolean
+    selected?: boolean
 
     shortName: string
     forward: number
@@ -11,7 +11,7 @@
   }
 
   const {
-    selected,
+    selected = false,
     name,
     shortName,
     minFreePrice,
