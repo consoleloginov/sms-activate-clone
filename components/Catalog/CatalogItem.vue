@@ -41,9 +41,9 @@
     padding: 12px 28px;
     display: grid;
     grid-template:
-      'img name       minFreePrice'
+      'img name       minFreePrice' 1fr
       'img forward    minFreePrice' auto
-      'img totalCount minFreePrice' / auto 1fr auto;
+      'img totalCount minFreePrice' 1fr / auto 1fr auto;
     align-items: center;
 
     &:nth-child(even) {

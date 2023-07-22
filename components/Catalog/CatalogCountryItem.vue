@@ -1,19 +1,16 @@
 <script setup lang="ts">
   type Props = {
-    totalCount: number
     country: number
     name: string
-    searchName: string
-    prices: {
-      min: number
-    }
+    price: number
+    count: number
   }
 
   const {
-    name,
     country,
-    prices,
-    totalCount,
+    name,
+    price,
+    count,
   } = defineProps<Props>()
 </script>
 
@@ -21,9 +18,9 @@
     <div class="CatalogCountryItem">
       <img v-bind:src="`https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/country/${country}.svg`" />
       <div class="CatalogCountryItem-name">{{ name }}</div>
-      <div class="CatalogCountryItem-totalCount">{{ totalCount }} шт</div>
-      <div class="CatalogCountryItem-minPrice">
-        {{ prices.min }} ₽
+      <div class="CatalogCountryItem-count">{{ count }} шт</div>
+      <div class="CatalogCountryItem-price">
+        {{ price }} ₽
       </div>
     </div>
 </template>
@@ -56,13 +53,13 @@
     font-weight: 600;
   }
 
-  .CatalogCountryItem-totalCount {
+  .CatalogCountryItem-count {
     grid-area: totalCount;
 
     @apply text-xs;
   }
 
-  .CatalogCountryItem-minPrice {
+  .CatalogCountryItem-price {
     grid-area: minPrice;
 
     font-weight: 600;

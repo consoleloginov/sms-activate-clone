@@ -29,14 +29,6 @@
   })
 
   let selectedItem = $ref<Item | null>(null)
-
-  const handleClickOnItem = (item: Item) => {
-    if (!selectedItem) {
-      selectedItem = item
-    } else {
-      selectedItem = null
-    }
-  }
 </script>
 
 <template>
@@ -56,16 +48,16 @@
           v-for="item of items"
           v-bind:key="item.shortName"
           v-bind="item"
-          v-on:click="handleClickOnItem(item)"
+          v-on:click="selectedItem = item"
         />
       </div>
     </template>
 
     <template v-else>
-      <div>
-        <CatalogItem selected v-bind="selectedItem" />
-        <CatalogCountries />
-      </div>
+      <CatalogCountries
+        v-bind="{selectedItem}"
+        v-on:goback="selectedItem = null"
+      />
     </template>
   </div>
 </template>
