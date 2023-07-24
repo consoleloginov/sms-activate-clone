@@ -2,33 +2,26 @@
   import CatalogOfCountries from './CatalogOfCountries.vue'
   import CatalogItem from './CatalogItem.vue'
 
-  let items = $ref(await $fetch('/api/catalog/items'))
+  import {useCatalogStore} from './CatalogStore'
 
-  type Item = typeof items[0]
+  const store = useCatalogStore()
+  const {
+    items,
+    loadItems,
+    loadMoreItems,
+  } = $(store)
+  let {
+    selectedItem,
+    search,
+  } = $(store)
 
-  let search = $ref('')
-
-  watchThrottled($$(search), async () => {
-    items = await $fetch('/api/catalog/items', {
-      query: {search}
-    })
-  }, {throttle: 1500})
-
-  const loadMoreItems = async (offset: number) => {
-    const moreItems = await $fetch('/api/catalog/items', {
-      query: {offset, search}
-    })
-
-    items.push(...moreItems)
-  }
+  await loadItems()
 
   const scrollContainer = ref<HTMLElement | null>(null)
 
   useInfiniteScroll(scrollContainer, async () => {
     await loadMoreItems(items.length)
   })
-
-  let selectedItem = $ref<Item | null>(null)
 </script>
 
 <template>
@@ -56,7 +49,7 @@
     <template v-else>
       <CatalogOfCountries
         v-bind="{selectedItem}"
-        v-on:goback="selectedItem = null"
+        v-on:goback="selectedItem = undefined"
       />
     </template>
   </div>

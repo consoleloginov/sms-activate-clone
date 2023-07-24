@@ -1,10 +1,7 @@
 <script setup lang="ts">
-  type Props = {
-    id: string
-    name: string
-    minPrice: number
-    logo_url: string
-  }
+  import {type Item} from './CatalogStore'
+
+  type Props = Item
 
   const {
     id,

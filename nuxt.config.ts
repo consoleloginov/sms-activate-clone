@@ -6,6 +6,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/google-fonts',
     '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+    '@vue-macros/nuxt',
     '@vueuse/nuxt',
   ],
 
@@ -13,5 +15,9 @@ export default defineNuxtConfig({
     families: {
       'Exo 2': [400, 600],
     },
+  },
+
+  pinia: {
+    autoImports: ['defineStore'],
   },
 })

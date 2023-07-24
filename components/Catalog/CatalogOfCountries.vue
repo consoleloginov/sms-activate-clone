@@ -1,13 +1,11 @@
 <script setup lang="ts">
   import CatalogCountryItem from './CatalogCountryItem.vue'
 
+  import {useCatalogOfCountriesStore} from './CatalogOfCountriesStore';
+  import {type Item} from './CatalogStore'
+
   type Props = {
-    selectedItem: {
-      id: string
-      name: string
-      minPrice: number
-      logo_url: string
-    }
+    selectedItem: Item
   }
 
   const {
@@ -16,27 +14,21 @@
 
   const emit = defineEmits(['goback'])
 
-  let countries = $ref(await $fetch('/api/catalog/countries'))
+  const store = useCatalogOfCountriesStore()
+  const {
+    countries,
+    loadCountries,
+    loadMoreCountries,
+  } = $(store)
+  let {
+    sortBy,
+  } = $(store)
 
-  let sortBy = $ref<'price' | 'quantity'>()
-
-  watch($$(sortBy), async () => {
-    countries = await $fetch('/api/catalog/countries', {
-      query: {sortBy}
-    })
-  })
+  await loadCountries()
 
   const handleSortingButtons = (arg: 'price' | 'quantity') => {
     if (sortBy !== arg) sortBy = arg
     else sortBy = undefined
-  }
-
-  const loadMoreCountries = async (offset: number) => {
-    const moreCountries = await $fetch('/api/catalog/countries', {
-      query: {offset, sortBy}
-    })
-
-    countries.push(...moreCountries)
   }
 
   const scrollContainer = ref<HTMLElement | null>(null)
