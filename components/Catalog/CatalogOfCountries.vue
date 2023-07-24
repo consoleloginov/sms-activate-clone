@@ -3,12 +3,10 @@
 
   type Props = {
     selectedItem: {
-      shortName: string
-      forward: number
-      totalCount: number
-      minFreePrice: number
+      id: string
       name: string
-      nameSearch: string
+      minPrice: number
+      logo_url: string
     }
   }
 
@@ -20,7 +18,7 @@
 
   let countries = $ref(await $fetch('/api/catalog/countries'))
 
-  let sortBy = $ref<'price' | 'count'>()
+  let sortBy = $ref<'price' | 'quantity'>()
 
   watch($$(sortBy), async () => {
     countries = await $fetch('/api/catalog/countries', {
@@ -28,7 +26,7 @@
     })
   })
 
-  const handleSortingButtons = (arg: 'price' | 'count') => {
+  const handleSortingButtons = (arg: 'price' | 'quantity') => {
     if (sortBy !== arg) sortBy = arg
     else sortBy = undefined
   }
@@ -49,20 +47,17 @@
 </script>
 
 <template>
-  <div class="CatalogCountries">
-    <div class="CatalogCountries-header">
-      <div class="CatalogCountries-header-item">
-        <img
-          v-bind:src="`https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/${selectedItem.shortName}0.webp`"
-          v-on:click="emit('goback')"
-        />
-        <div class="CatalogCountries-header-item-name">{{ selectedItem.name }}</div>
-        <div v-if="selectedItem.forward" class="CatalogCountries-header-item-forward">+переадресация</div>
-      </div>
+  <div class="CatalogOfCountries">
+    <div class="CatalogOfCountries-headerItem">
+      <img
+        v-bind:src="selectedItem.logo_url"
+        v-on:click="emit('goback')"
+      />
+      <div class="font-semibold">{{ selectedItem.name }}</div>
     </div>
 
-    <div class="CatalogCountries-scrollContainer" ref="scrollContainer">
-      <div class="CatalogCountries-sorting">
+    <div class="CatalogOfCountries-scrollContainer" ref="scrollContainer">
+      <div class="CatalogOfCountries-sorting">
         <span class="font-semibold">Сортировать по:</span>
 
         <button
@@ -70,14 +65,14 @@
           v-on:click="handleSortingButtons('price')"
         >Цене</button>
         <button
-          v-bind:class="{active: sortBy === 'count'}"
-          v-on:click="handleSortingButtons('count')"
+          v-bind:class="{active: sortBy === 'quantity'}"
+          v-on:click="handleSortingButtons('quantity')"
         >Кол-ву</button>
       </div>
 
       <CatalogCountryItem
         v-for="country of countries"
-        v-bind:key="country.country"
+        v-bind:key="country.id"
         v-bind="country"
       />
     </div>
@@ -85,53 +80,31 @@
 </template>
 
 <style scoped>
-  .CatalogCountries {
+  .CatalogOfCountries {
     @apply text-white bg-sky-900;
   }
 
-  .CatalogCountries-scrollContainer {
+  .CatalogOfCountries-scrollContainer {
     max-height: 100vh;
     overflow: scroll;
   }
 
-  .CatalogCountries-header {
-
-  }
-
-  .CatalogCountries-header-item {
+  .CatalogOfCountries-headerItem {
     padding: 12px 28px;
-    display: grid;
-    grid-template:
-      'img name' 1fr
-      'img forward' auto / auto 1fr;
-    /* align-content: center; */
+    display: flex;
     align-items: center;
 
     @apply bg-sky-900 text-white;
   }
 
-  .CatalogCountries-header-item img {
-    grid-area: img;
-
+  .CatalogOfCountries-headerItem img {
     width: 36px;
     height: 36px;
     margin-right: 8px;
     border-radius: 9999px;
   }
 
-  .CatalogCountries-header-item-name {
-    grid-area: name;
-
-    font-weight: 600;
-  }
-
-  .CatalogCountries-header-item-forward {
-    grid-area: forward;
-
-    @apply text-xs;
-  }
-
-  .CatalogCountries-sorting {
+  .CatalogOfCountries-sorting {
     padding: 0 18px 12px 28px;
     display: grid;
     align-items: center;
@@ -139,7 +112,7 @@
     gap: 8px;
   }
 
-  .CatalogCountries-sorting button {
+  .CatalogOfCountries-sorting button {
     padding: 4px 8px;
     line-height: 1;
     border-radius: 9999px;

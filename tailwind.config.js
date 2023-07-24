@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const plugin = require('tailwindcss/plugin')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -14,4 +15,14 @@ module.exports = {
       },
     },
   },
+
+  plugins: [
+    plugin(({matchUtilities}) => {
+      matchUtilities({
+        'grid-area': (value) => ({
+          'grid-area': value,
+        })
+      })
+    })
+  ],
 }

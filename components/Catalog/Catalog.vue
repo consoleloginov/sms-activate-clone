@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CatalogCountries from './CatalogCountries.vue'
+  import CatalogOfCountries from './CatalogOfCountries.vue'
   import CatalogItem from './CatalogItem.vue'
 
   let items = $ref(await $fetch('/api/catalog/items'))
@@ -46,7 +46,7 @@
 
         <CatalogItem
           v-for="item of items"
-          v-bind:key="item.shortName"
+          v-bind:key="item.id"
           v-bind="item"
           v-on:click="selectedItem = item"
         />
@@ -54,7 +54,7 @@
     </template>
 
     <template v-else>
-      <CatalogCountries
+      <CatalogOfCountries
         v-bind="{selectedItem}"
         v-on:goback="selectedItem = null"
       />

@@ -1,4 +1,21 @@
+import {omit} from 'radash'
+
 import response from '@/heap/getAllServicesDesktop-response-example.json'
+
+const items = response.data
+  .filter(({forward}) => !forward)
+  .map(({
+    shortName,
+    name,
+    minPrice,
+    nameSearch,
+  }) => ({
+    id: shortName,
+    name,
+    minPrice,
+    logo_url: `https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/${shortName}0.webp`,
+    _nameSearch: nameSearch,
+  }))
 
 export default defineEventHandler((event) => {
   const queryParams = getQuery(event)
@@ -10,22 +27,13 @@ export default defineEventHandler((event) => {
 
   const searchQuery = queryParams.search as string ?? ''
 
-  const items = response.data
   let result = items
 
   if (searchQuery) {
-    result = result.filter(({ nameSearch}) => nameSearch.includes(searchQuery))
+    result = result.filter(({_nameSearch}) => _nameSearch.includes(searchQuery))
   }
 
-  result = result.slice(offset, offset + limit)
-
-  result.map((item) => {
-    const substr = '<small>+переадресация</small>'
-    if (item.forward) {
-      item.name = item.name.slice(0, -substr.length)
-    }
-    return item
-  })
-
   return result
+    .slice(offset, offset + limit)
+    .map((item) => omit(item, ['_nameSearch']))
 })

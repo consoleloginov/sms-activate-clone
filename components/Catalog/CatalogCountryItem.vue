@@ -1,28 +1,30 @@
 <script setup lang="ts">
   type Props = {
-    country: number
+    id: string
     name: string
     price: number
-    count: number
+    quantity: number
+    flag_url: string
   }
 
   const {
-    country,
+    id,
     name,
     price,
-    count,
+    quantity,
+    flag_url,
   } = defineProps<Props>()
 </script>
 
 <template>
-    <div class="CatalogCountryItem">
-      <img v-bind:src="`https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/country/${country}.svg`" />
-      <div class="CatalogCountryItem-name">{{ name }}</div>
-      <div class="CatalogCountryItem-count">{{ count }} шт</div>
-      <div class="CatalogCountryItem-price">
-        {{ price }} ₽
-      </div>
+  <div class="CatalogCountryItem">
+    <img v-bind:src="flag_url" />
+    <div class="grid-area-[name] font-semibold">{{ name }}</div>
+    <div class="grid-area-[quantity] text-xs">{{ quantity }} шт</div>
+    <div class="grid-area-[price] font-semibold">
+      {{ price }} ₽
     </div>
+  </div>
 </template>
 
 <style scoped>
@@ -30,8 +32,8 @@
     padding: 12px 28px;
     display: grid;
     grid-template:
-      'img name       minPrice'
-      'img totalCount minPrice' / auto 1fr auto;
+      'img name     price'
+      'img quantity price' / auto 1fr auto;
     align-items: center;
 
     &:nth-child(even) {
@@ -45,23 +47,5 @@
     width: 36px;
     margin-right: 8px;
     border-radius: 4px;
-  }
-
-  .CatalogCountryItem-name {
-    grid-area: name;
-
-    font-weight: 600;
-  }
-
-  .CatalogCountryItem-count {
-    grid-area: totalCount;
-
-    @apply text-xs;
-  }
-
-  .CatalogCountryItem-price {
-    grid-area: minPrice;
-
-    font-weight: 600;
   }
 </style>
