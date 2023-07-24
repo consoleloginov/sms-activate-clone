@@ -4,18 +4,18 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@nuxtjs/google-fonts',
+    // '@nuxtjs/google-fonts',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@vue-macros/nuxt',
     '@vueuse/nuxt',
   ],
 
-  googleFonts: {
-    families: {
-      'Exo 2': [400, 600],
-    },
-  },
+  // googleFonts: {
+  //   families: {
+  //     'Exo 2': [400, 600],
+  //   },
+  // },
 
   pinia: {
     autoImports: ['defineStore'],
