@@ -30,6 +30,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
   ],
 
+  ui: {
+    prefix: 'Nuxt',
+  },
+
   colorMode: {
     preference: 'light',
   },

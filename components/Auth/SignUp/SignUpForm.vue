@@ -14,21 +14,21 @@
       Зарегистрироваться
     </h1>
 
-    <UFormGroup label="Email">
-      <UInput v-model="formData.email" color="gray" />
-    </UFormGroup>
+    <NuxtFormGroup label="Email">
+      <NuxtInput v-model="formData.email" color="gray" />
+    </NuxtFormGroup>
 
-    <UFormGroup label="Пароль">
-      <UInput v-model="formData.password" type="password" color="gray" />
-    </UFormGroup>
+    <NuxtFormGroup label="Пароль">
+      <NuxtInput v-model="formData.password" type="password" color="gray" />
+    </NuxtFormGroup>
 
-    <UFormGroup label="Подтвердите пароль">
-      <UInput v-model="formData.confirmPassword" type="password" color="gray" />
-    </UFormGroup>
+    <NuxtFormGroup label="Подтвердите пароль">
+      <NuxtInput v-model="formData.confirmPassword" type="password" color="gray" />
+    </NuxtFormGroup>
 
-    <UButton type="submit" block size="lg" class="mt-[10px]">
+    <NuxtButton type="submit" block size="lg" class="mt-[10px]">
       Создать аккаунт
-    </UButton>
+    </NuxtButton>
 
     <div>
       Есть аккаунт?
