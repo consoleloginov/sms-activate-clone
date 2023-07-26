@@ -4,7 +4,7 @@
 
 <template>
   <div class="App">
-    <Catalog />
+    <NuxtPage />
   </div>
 </template>
 
@@ -12,9 +12,6 @@
   @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap');
 
   .App {
-    display: grid;
-    place-content: center;
-
-    @apply text-sm;
+    @apply text-sm text-gray-900;
   }
 </style>

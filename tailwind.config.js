@@ -13,6 +13,9 @@ module.exports = {
       fontFamily: {
         'sans': ['"Exo 2"', ...defaultTheme.fontFamily.sans],
       },
+      fontWeight: {
+        '600': 600,
+      }
     },
   },
 
