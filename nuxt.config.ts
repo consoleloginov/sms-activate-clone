@@ -23,6 +23,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxthq/ui',
     // '@nuxtjs/google-fonts',
+    '@nuxtjs/supabase',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@vue-macros/nuxt',

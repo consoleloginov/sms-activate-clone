@@ -1,21 +1,29 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import {useSignUpFormStore} from './SignUpFormStore'
+
+  const store = useSignUpFormStore()
+  const {
+    formData,
+    submit,
+  } = $(store)
+</script>
 
 <template>
-  <form class="SignUpForm">
+  <form class="SignUpForm" v-on:submit.prevent="submit">
     <h1>
       Зарегистрироваться
     </h1>
 
     <UFormGroup label="Email">
-      <UInput color="gray" />
+      <UInput v-model="formData.email" color="gray" />
     </UFormGroup>
 
     <UFormGroup label="Пароль">
-      <UInput type="password" color="gray" />
+      <UInput v-model="formData.password" type="password" color="gray" />
     </UFormGroup>
 
     <UFormGroup label="Подтвердите пароль">
-      <UInput type="password" color="gray" />
+      <UInput v-model="formData.confirmPassword" type="password" color="gray" />
     </UFormGroup>
 
     <UButton type="submit" block size="lg" class="mt-[10px]">
