@@ -1,24 +1,53 @@
+import z from 'zod'
+import type {Form} from '@nuxthq/ui/dist/runtime/types'
+
 export type SignUpFormData = {
   email: string
   password: string
-  confirmPassword: string
+  passwordConfirm: string
 }
 
 export const useSignUpFormStore = defineStore('SignUpForm', () => {
   const supabase = useSupabaseClient()
 
-  const formData = $ref<SignUpFormData>({
+  const data = $ref<SignUpFormData>({
     email: '',
     password: '',
-    confirmPassword: '',
+    passwordConfirm: '',
   })
 
+  const schema = z.object({
+    email: z.string().email('Недопустимый формат эл. почты'),
+    password: z.string().min(8, 'Пароль должен содержать не менее 8 символов'),
+    passwordConfirm: z.string(),
+  }).refine(({
+    password,
+    passwordConfirm
+  }) => password === passwordConfirm, {
+    path: ['passwordConfirm'],
+    message: 'Пароли не совпадают',
+  })
+
+  type Schema = z.output<typeof schema>
+
+  const formRef = $ref<Form<Schema>>()
+
   const submit = async () => {
-    const response = supabase.auth.signUp(formData)
+    console.log('submit')
+
+    try {
+      await formRef?.validate()
+    } catch (err) {
+      console.log(err)
+    }
+
+    // const response = supabase.auth.signUp(formData)
   }
 
   return $$({
-    formData,
+    data,
+    schema,
     submit,
+    formRef,
   })
 })

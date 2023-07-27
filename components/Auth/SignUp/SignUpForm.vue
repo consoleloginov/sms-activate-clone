@@ -3,27 +3,34 @@
 
   const store = useSignUpFormStore()
   const {
-    formData,
+    data,
+    schema,
     submit,
+    formRef,
   } = $(store)
 </script>
 
 <template>
-  <form class="SignUpForm" v-on:submit.prevent="submit">
+  <NuxtForm class="SignUpForm"
+    ref="formRef"
+    v-bind:state="data"
+    v-bind:schema="schema"
+    v-on:submit.prevent="submit"
+  >
     <h1>
       Зарегистрироваться
     </h1>
 
-    <NuxtFormGroup label="Email">
-      <NuxtInput v-model="formData.email" color="gray" />
+    <NuxtFormGroup name="email" label="Email">
+      <NuxtInput v-model="data.email" color="gray" />
     </NuxtFormGroup>
 
-    <NuxtFormGroup label="Пароль">
-      <NuxtInput v-model="formData.password" type="password" color="gray" />
+    <NuxtFormGroup name="password" label="Пароль">
+      <NuxtInput v-model="data.password" type="password" color="gray" />
     </NuxtFormGroup>
 
-    <NuxtFormGroup label="Подтвердите пароль">
-      <NuxtInput v-model="formData.confirmPassword" type="password" color="gray" />
+    <NuxtFormGroup name="passwordConfirm" label="Подтвердите пароль">
+      <NuxtInput v-model="data.passwordConfirm" type="password" color="gray" />
     </NuxtFormGroup>
 
     <NuxtButton type="submit" block size="lg" class="mt-[10px]">
@@ -34,7 +41,7 @@
       Есть аккаунт?
       <NuxtLink to="/auth/sign-in">Войти</NuxtLink>
     </div>
-  </form>
+  </NuxtForm>
 </template>
 
 <style scoped>
