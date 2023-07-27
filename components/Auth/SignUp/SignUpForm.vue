@@ -7,6 +7,7 @@
     schema,
     submit,
     formRef,
+    submitError,
   } = $(store)
 </script>
 
@@ -21,7 +22,10 @@
       Зарегистрироваться
     </h1>
 
-    <NuxtFormGroup name="email" label="Email">
+    <NuxtFormGroup name="email"
+      label="Email"
+      help="Не используйте временную или одноразовую почту. Мы не восстанавливаем доступ пользователям к подобным аккаунтам!"
+    >
       <NuxtInput v-model="data.email" color="gray" />
     </NuxtFormGroup>
 
@@ -36,6 +40,8 @@
     <NuxtButton type="submit" block size="lg" class="mt-[10px]">
       Создать аккаунт
     </NuxtButton>
+
+    <span v-if="submitError" class="text-red-500">{{submitError}}</span>
 
     <div>
       Есть аккаунт?

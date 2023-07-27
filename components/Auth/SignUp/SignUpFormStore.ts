@@ -32,16 +32,22 @@ export const useSignUpFormStore = defineStore('SignUpForm', () => {
 
   const formRef = $ref<Form<Schema>>()
 
+  let submitError = $ref<string>()
+
   const submit = async () => {
     console.log('submit')
 
     try {
       await formRef?.validate()
+
+      const response = await supabase.auth.signUp(data)
+
+      if (response.error && response.error.message === 'User already registered') {
+        submitError = 'Другой пользователь уже использовал эту эл. почту для создания аккаунта'
+      }
     } catch (err) {
       console.log(err)
     }
-
-    // const response = supabase.auth.signUp(formData)
   }
 
   return $$({
@@ -49,5 +55,6 @@ export const useSignUpFormStore = defineStore('SignUpForm', () => {
     schema,
     submit,
     formRef,
+    submitError,
   })
 })
