@@ -11,8 +11,12 @@ export default defineNuxtConfig({
           file: '@/components/Auth/AuthPage.vue',
           children: [
             {
-              path: '/auth/signup',
+              path: '/auth/sign-up',
               file: '@/components/Auth/SignUp/SignUpForm.vue',
+            },
+            {
+              path: '/auth/sign-in',
+              file: '@/components/Auth/SignIn/SignInForm.vue',
             },
           ],
         },
@@ -47,4 +51,8 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ['defineStore'],
   },
+
+  vite: {
+    clearScreen: false,
+  }
 })
