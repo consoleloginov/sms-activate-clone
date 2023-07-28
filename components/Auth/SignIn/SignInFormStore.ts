@@ -1,3 +1,5 @@
+import {defineStore, acceptHMRUpdate} from 'pinia'
+
 import z from 'zod'
 import type {Form} from '@nuxthq/ui/dist/runtime/types'
 
@@ -46,3 +48,7 @@ export const useSignInFormStore = defineStore('SignInForm', () => {
     submitError,
   })
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useSignInFormStore, import.meta.hot))
+}
