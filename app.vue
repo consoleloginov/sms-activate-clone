@@ -9,6 +9,11 @@
 <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap');
 
+  html {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
   .App {
     @apply text-sm text-gray-900;
   }
