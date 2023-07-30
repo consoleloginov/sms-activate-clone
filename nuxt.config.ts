@@ -3,27 +3,6 @@ export default defineNuxtConfig({
     reactivityTransform: true,
   },
 
-  hooks: {
-    'pages:extend'(pages) {
-      pages.push(...[
-        {
-          path: '/auth',
-          file: '@/components/Auth/AuthPage.vue',
-          children: [
-            {
-              path: '/auth/sign-up',
-              file: '@/components/Auth/SignUp/SignUpForm.vue',
-            },
-            {
-              path: '/auth/sign-in',
-              file: '@/components/Auth/SignIn/SignInForm.vue',
-            },
-          ],
-        },
-      ])
-    }
-  },
-
   modules: [
     '@nuxthq/ui',
     // '@nuxtjs/google-fonts',

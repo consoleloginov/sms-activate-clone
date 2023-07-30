@@ -43,7 +43,7 @@
 
     <div>
       Еще нет аккаунта?
-      <NuxtLink to="/auth/sign-in">Зарегистрироваться</NuxtLink>
+      <NuxtLink to="/sign-up">Зарегистрироваться</NuxtLink>
     </div>
   </form>
 </template>

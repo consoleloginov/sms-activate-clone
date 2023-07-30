@@ -1,10 +1,8 @@
-<script setup lang="ts">
-  import Catalog from '@/components/Catalog/Catalog.vue'
-</script>
-
 <template>
   <div class="App">
-    <NuxtPage />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
 

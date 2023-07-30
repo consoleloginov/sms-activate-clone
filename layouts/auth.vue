@@ -1,20 +1,20 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="AuthPage">
-    <a class="AuthPage-logo" href="#">
+  <div class="AuthLayout">
+    <a class="AuthLayout-logo" href="#">
       <img class="w-8 h-8 mr-2"
         src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
         alt="logo" />
       Flowbite
     </a>
 
-    <NuxtPage />
+    <slot></slot>
   </div>
 </template>
 
 <style scoped>
-  .AuthPage {
+  .AuthLayout {
     min-height: 100vh;
     display: grid;
     place-content: center;
@@ -24,7 +24,7 @@
     @apply bg-gray-50;
   }
 
-  .AuthPage-logo {
+  .AuthLayout-logo {
     margin-bottom: 24px;
     display: flex;
     align-items: center;

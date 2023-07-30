@@ -45,7 +45,7 @@
 
     <div>
       Есть аккаунт?
-      <NuxtLink to="/auth/sign-in">Войти</NuxtLink>
+      <NuxtLink to="/sign-in">Войти</NuxtLink>
     </div>
   </NuxtForm>
 </template>
