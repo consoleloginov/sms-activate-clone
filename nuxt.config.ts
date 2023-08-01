@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vue-macros/nuxt',
     '@vueuse/nuxt',
+    'nuxt-icon',
   ],
 
   ui: {
