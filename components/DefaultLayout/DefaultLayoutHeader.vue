@@ -1,5 +1,12 @@
 <script setup lang="ts">
+  const supabase = useSupabaseClient()
   const user = $(useSupabaseUser())
+
+  const signOut = async () => {
+    console.log('signOut')
+    const {error} = await supabase.auth.signOut()
+    if (error) console.log(error)
+  }
 </script>
 
 <template>
@@ -18,15 +25,38 @@
       />
     </div> -->
 
-    <div v-if="user" class="DefaultLayoutHeader-user">
-      <div class="DefaultLayoutHeader-user-avatar">
-        <Icon name="mdi:user" />
-      </div>
-      <div>
-        <div>{{ user.email }}</div>
-        <div class="font-600 text-orange-500">10 000.99 ₽</div>
-      </div>
-    </div>
+    <template v-if="user">
+      <NuxtPopover>
+        <div v-if="user" class="DefaultLayoutHeader-user">
+          <div class="DefaultLayoutHeader-user-avatar">
+            <Icon name="mdi:user" />
+          </div>
+          <div>
+            <div>{{ user.email }}</div>
+            <div class="font-600 text-orange-500">10 000.99 ₽</div>
+          </div>
+        </div>
+
+        <template v-slot:panel>
+          <div class="w-[200px]">
+            <div class="flex flex-col p-2 gap-2 border-b border-gray-200">
+              <div v-for="_ of 3" class="w-full h-5 bg-slate-200">
+              </div>
+            </div>
+          </div>
+          <div class="p-2">
+            <NuxtButton
+              block
+              color="red"
+              variant="soft"
+              v-on:click="signOut()"
+            >
+              Выйти из аккаунта
+            </NuxtButton>
+          </div>
+        </template>
+      </NuxtPopover>
+    </template>
 
     <div v-else class="flex gap-x-2">
       <NuxtButton color="gray" to="/sign-in">

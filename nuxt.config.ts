@@ -32,6 +32,10 @@ export default defineNuxtConfig({
     autoImports: ['defineStore'],
   },
 
+  supabase: {
+    redirect: false,
+  },
+
   vite: {
     clearScreen: false,
   }
