@@ -59,11 +59,11 @@
     </template>
 
     <div v-else class="flex gap-x-2">
-      <NuxtButton color="gray" to="/sign-in">
+      <NuxtButton to="/sign-in" color="gray">
         Войти
       </NuxtButton>
 
-      <NuxtButton color="blue" to="/sign-up">
+      <NuxtButton to="/sign-up">
         Регистрация
       </NuxtButton>
     </div>
