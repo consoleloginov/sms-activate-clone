@@ -35,6 +35,6 @@ export const useCatalogItemsStore = defineStore('CatalogItems', () => {
   })
 })
 
-// if (import.meta.hot) {
-//   import.meta.hot.accept(acceptHMRUpdate(useCatalogItemsStore, import.meta.hot))
-// }
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useCatalogItemsStore, import.meta.hot))
+}

@@ -35,6 +35,6 @@ export const useCatalogCountriesStore = defineStore('CatalogCountries', () => {
   })
 })
 
-// if (import.meta.hot) {
-//   import.meta.hot.accept(acceptHMRUpdate(useCatalogCountriesStore, import.meta.hot))
-// }
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useCatalogCountriesStore, import.meta.hot))
+}
