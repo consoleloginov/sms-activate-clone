@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import {type Item} from './CatalogStore'
+  import type {Item} from '@/stores/CatalogStore'
 
   type Props = Item
 

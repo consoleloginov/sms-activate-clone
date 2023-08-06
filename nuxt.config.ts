@@ -3,6 +3,8 @@ export default defineNuxtConfig({
     reactivityTransform: true,
   },
 
+  components: [{path: '@/components', pathPrefix: false}],
+
   modules: [
     '@nuxthq/ui',
     // '@nuxtjs/google-fonts',

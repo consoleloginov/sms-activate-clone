@@ -1,20 +1,12 @@
 <script setup lang="ts">
-  import CatalogCountryItem from './CatalogCountryItem.vue'
+  import {
+    useCatalogCommonStore,
+    useCatalogCountriesStore
+  } from '@/stores/CatalogStore'
 
-  import {useCatalogOfCountriesStore} from './CatalogOfCountriesStore';
-  import {type Item} from './CatalogStore'
+  let {selectedItem} = $(useCatalogCommonStore())
 
-  type Props = {
-    selectedItem: Item
-  }
-
-  const {
-    selectedItem,
-  } = defineProps<Props>()
-
-  const emit = defineEmits(['goback'])
-
-  const store = useCatalogOfCountriesStore()
+  const store = useCatalogCountriesStore()
   const {
     countries,
     loadCountries,
@@ -34,22 +26,22 @@
   const scrollContainer = ref<HTMLElement | null>(null)
 
   useInfiniteScroll(scrollContainer, async () => {
-    await loadMoreCountries(countries.length)
+    await loadMoreCountries()
   })
 </script>
 
 <template>
-  <div class="CatalogOfCountries">
-    <div class="CatalogOfCountries-headerItem">
+  <div class="CatalogCountries">
+    <div class="CatalogCountries-headerItem">
       <img
-        v-bind:src="selectedItem.logo_url"
-        v-on:click="emit('goback')"
+        v-bind:src="selectedItem!.logo_url"
+        v-on:click="selectedItem = null"
       />
-      <div class="font-semibold">{{ selectedItem.name }}</div>
+      <div class="font-semibold">{{ selectedItem!.name }}</div>
     </div>
 
-    <div class="CatalogOfCountries-scrollContainer" ref="scrollContainer">
-      <div class="CatalogOfCountries-sorting">
+    <div class="CatalogCountries-scrollContainer" ref="scrollContainer">
+      <div class="CatalogCountries-sorting">
         <span class="font-semibold">Сортировать по:</span>
 
         <button
@@ -72,16 +64,16 @@
 </template>
 
 <style scoped>
-  .CatalogOfCountries {
+  .CatalogCountries {
     @apply text-white bg-sky-900;
   }
 
-  .CatalogOfCountries-scrollContainer {
+  .CatalogCountries-scrollContainer {
     max-height: 100vh;
     overflow: scroll;
   }
 
-  .CatalogOfCountries-headerItem {
+  .CatalogCountries-headerItem {
     padding: 12px 28px;
     display: flex;
     align-items: center;
@@ -89,14 +81,14 @@
     @apply bg-sky-900 text-white;
   }
 
-  .CatalogOfCountries-headerItem img {
+  .CatalogCountries-headerItem img {
     width: 36px;
     height: 36px;
     margin-right: 8px;
     border-radius: 9999px;
   }
 
-  .CatalogOfCountries-sorting {
+  .CatalogCountries-sorting {
     padding: 0 18px 12px 28px;
     display: grid;
     align-items: center;
@@ -104,7 +96,7 @@
     gap: 8px;
   }
 
-  .CatalogOfCountries-sorting button {
+  .CatalogCountries-sorting button {
     padding: 4px 8px;
     line-height: 1;
     border-radius: 9999px;
