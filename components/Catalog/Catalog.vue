@@ -15,5 +15,7 @@
   .Catalog {
     width: 320px;
     max-height: 100vh;
+
+    @apply text-base font-inter;
   }
 </style>

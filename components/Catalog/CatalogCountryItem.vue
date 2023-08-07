@@ -14,34 +14,48 @@
 
 <template>
   <div class="CatalogCountryItem">
-    <img v-bind:src="flag_url" />
-    <div class="grid-area-[name] font-semibold">{{ name }}</div>
-    <div class="grid-area-[quantity] text-xs">{{ quantity }} шт</div>
-    <div class="grid-area-[price] font-semibold">
+    <img class="CatalogCountryItem-flag" v-bind:src="flag_url" />
+    <div class="grow">
+      <div class="CatalogCountryItem-name">{{ name }}</div>
+      <div class="CatalogCountryItem-quantity">{{ quantity }} шт</div>
+    </div>
+    <div class="CatalogCountryItem-price">
       {{ price }} ₽
     </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
   .CatalogCountryItem {
-    padding: 12px 28px;
-    display: grid;
-    grid-template:
-      'img name     price'
-      'img quantity price' / auto 1fr auto;
+    padding: 12px 24px;
+    display: flex;
     align-items: center;
+    gap: 8px;
 
-    &:nth-child(even) {
-      background: rgba(255, 255, 255, 0.1);
+    @apply transition-colors;
+
+    &:hover {
+      @apply bg-gray-100;
     }
   }
 
-  .CatalogCountryItem img {
-    grid-area: img;
-
-    width: 36px;
-    margin-right: 8px;
+  .CatalogCountryItem-flag {
+    width: 40px;
+    height: 30px;
     border-radius: 4px;
+
+    @apply shadow;
+  }
+
+  .CatalogCountryItem-name {
+    font-weight: 600;
+  }
+
+  .CatalogCountryItem-quantity {
+    @apply text-xs;
+  }
+
+  .CatalogCountryItem-price {
+    font-weight: 600;
   }
 </style>

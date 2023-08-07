@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': ['"Exo 2"', ...defaultTheme.fontFamily.sans],
+        'inter': ['Inter'],
       },
       fontWeight: {
         '600': 600,

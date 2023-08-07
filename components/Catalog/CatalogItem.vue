@@ -13,30 +13,43 @@
 
 <template>
   <div class="CatalogItem">
-    <img v-bind:src="logo_url" />
-    <div class="font-semibold">{{ name }}</div>
-    <div>от
+    <img class="CatalogItem-logo" v-bind:src="logo_url" />
+    <div class="grow">
+      <div class="CatalogItem-name">{{ name }}</div>
+    </div>
+    <div class="CatalogItem-minPrice">от
       <span class="font-semibold">{{ minPrice }} ₽</span>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
   .CatalogItem {
-    padding: 12px 28px;
-    display: grid;
+    padding: 12px 24px;
+    display: flex;
     align-items: center;
-    grid-template-columns: auto 1fr auto;
+    gap: 8px;
+    cursor: pointer;
 
-    &:nth-child(even) {
-      @apply bg-slate-100;
+    @apply transition-colors;
+
+    &:hover {
+      @apply bg-gray-100;
     }
   }
 
-  .CatalogItem img {
+  .CatalogItem-logo {
     width: 36px;
     height: 36px;
-    margin-right: 8px;
+    margin: 0 2px;
     border-radius: 9999px;
+  }
+
+  .CatalogItem-name {
+    font-weight: 600;
+  }
+
+  .CatalogItem-minPrice {
+    white-space: nowrap;
   }
 </style>

@@ -38,6 +38,10 @@ export default defineNuxtConfig({
     redirect: false,
   },
 
+  tailwindcss: {
+    viewer: false
+  },
+
   vite: {
     clearScreen: false,
   }

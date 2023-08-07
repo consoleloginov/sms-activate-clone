@@ -32,27 +32,8 @@
 
 <template>
   <div class="CatalogCountries">
-    <div class="CatalogCountries-headerItem">
-      <img
-        v-bind:src="selectedItem!.logo_url"
-        v-on:click="selectedItem = null"
-      />
-      <div class="font-semibold">{{ selectedItem!.name }}</div>
-    </div>
-
     <div class="CatalogCountries-scrollContainer" ref="scrollContainer">
-      <div class="CatalogCountries-sorting">
-        <span class="font-semibold">Сортировать по:</span>
-
-        <button
-          v-bind:class="{active: sortBy === 'price'}"
-          v-on:click="handleSortingButtons('price')"
-        >Цене</button>
-        <button
-          v-bind:class="{active: sortBy === 'quantity'}"
-          v-on:click="handleSortingButtons('quantity')"
-        >Кол-ву</button>
-      </div>
+      <CatalogCountriesHeader />
 
       <CatalogCountryItem
         v-for="country of countries"
@@ -63,9 +44,9 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
   .CatalogCountries {
-    @apply text-white bg-sky-900;
+
   }
 
   .CatalogCountries-scrollContainer {
