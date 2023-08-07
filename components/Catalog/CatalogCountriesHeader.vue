@@ -7,11 +7,9 @@
   let {selectedItem} = $(useCatalogCommonStore())
 
   let {
-    // search,
+    search,
     sortBy,
   } = $(useCatalogCountriesStore())
-
-  // let search = $ref('')
 
   const handleSortingControls = (arg: 'price' | 'quantity') => {
     if (sortBy !== arg) sortBy = arg
@@ -40,7 +38,7 @@
         </button>
       </div>
 
-      <CatalogSearchInput />
+      <CatalogSearchInput v-model="search" />
     </div>
 
     <div class="CatalogCountriesHeader-sorting">

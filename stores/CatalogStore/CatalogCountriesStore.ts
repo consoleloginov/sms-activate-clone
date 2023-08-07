@@ -5,6 +5,8 @@ import type {CountryItem} from './types'
 export const useCatalogCountriesStore = defineStore('CatalogCountries', () => {
   let countries = $ref<CountryItem[]>()
 
+  let search = $ref('')
+
   let sortBy = $ref<'price' | 'quantity'>()
 
   const loadCountries = async () => {
@@ -15,7 +17,7 @@ export const useCatalogCountriesStore = defineStore('CatalogCountries', () => {
     const offset = countries?.length
 
     const moreCountries = await $fetch('/api/catalog/countries', {
-      query: {sortBy, offset}
+      query: {search, sortBy, offset}
     })
 
     countries!.push(...moreCountries)
@@ -23,12 +25,19 @@ export const useCatalogCountriesStore = defineStore('CatalogCountries', () => {
 
   watch($$(sortBy), async () => {
     countries = await $fetch('/api/catalog/countries', {
-      query: {sortBy}
+      query: {search, sortBy}
     })
   })
 
+  watchThrottled($$(search), async () => {
+    countries = await $fetch('/api/catalog/countries', {
+      query: {search, sortBy}
+    })
+  }, {throttle: 1500})
+
   return $$({
     countries,
+    search,
     sortBy,
     loadCountries,
     loadMoreCountries
