@@ -12,7 +12,7 @@
 <template>
   <header class="DefaultLayoutHeader">
     <div class="flex items-center text-2xl font-600">
-      <img class="w-8 h-8 mr-2"
+      <img class="w-9 h-9 ml-0.5 mr-2"
         src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
         alt="logo" />
 
@@ -72,14 +72,18 @@
 
 <style scoped>
   .DefaultLayoutHeader {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+
     width: 100%;
     height: 60px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-inline: 32px;
-    column-gap: 32px;
+    padding: 0 24px;
+    column-gap: 24px;
 
     @apply border-b border-gray-200 bg-white;
   }

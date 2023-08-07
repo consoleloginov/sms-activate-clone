@@ -18,6 +18,6 @@
 
 <style lang="scss">
   .CatalogItemsHeader {
-    padding: 0 24px 10px 24px;
+    padding: 16px 24px 10px 24px;
   }
 </style>
