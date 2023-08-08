@@ -26,29 +26,18 @@
 </script>
 
 <template>
-  <div class="CatalogItems">
-    <template v-if="items">
-      <div class="CatalogItems-scrollContainer" ref="scrollContainer">
-        <CatalogItemsHeader />
-
-        <CatalogItem
-          v-for="item of items"
-          v-bind:key="item.id"
-          v-bind="item"
-          v-on:click="selectedItem = item"
-        />
-      </div>
-    </template>
-
-    <template v-else>
-      loading...
-    </template>
+  <div class="CatalogItems" ref="scrollContainer">
+    <CatalogItem
+      v-for="item of items"
+      v-bind:key="item.id"
+      v-bind="item"
+      v-on:click="selectedItem = item"
+    />
   </div>
 </template>
 
 <style scoped>
-  .CatalogItems-scrollContainer {
-    max-height: 100vh;
+  .CatalogItems {
     overflow-y: scroll;
   }
 </style>

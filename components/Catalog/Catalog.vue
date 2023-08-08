@@ -6,6 +6,8 @@
 
 <template>
   <div class="Catalog">
+    <CatalogHeader />
+
     <CatalogItems v-if="!selectedItem"/>
     <CatalogCountries v-else />
   </div>
@@ -15,6 +17,8 @@
   .Catalog {
     width: 320px;
     max-height: 100vh;
+    display: flex;
+    flex-flow: column;
 
     @apply text-base font-inter;
   }

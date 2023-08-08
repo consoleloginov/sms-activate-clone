@@ -18,26 +18,17 @@
 </script>
 
 <template>
-  <div class="CatalogCountries">
-    <div class="CatalogCountries-scrollContainer" ref="scrollContainer">
-      <CatalogCountriesHeader />
-
-      <CatalogCountryItem
-        v-for="country of countries"
-        v-bind:key="country.id"
-        v-bind="country"
-      />
-    </div>
+  <div class="CatalogCountries" ref="scrollContainer">
+    <CatalogCountryItem
+      v-for="country of countries"
+      v-bind:key="country.id"
+      v-bind="country"
+    />
   </div>
 </template>
 
 <style lang="scss">
   .CatalogCountries {
-
-  }
-
-  .CatalogCountries-scrollContainer {
-    max-height: 100vh;
     overflow-y: scroll;
   }
 </style>
