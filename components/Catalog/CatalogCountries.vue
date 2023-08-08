@@ -38,6 +38,6 @@
 
   .CatalogCountries-scrollContainer {
     max-height: 100vh;
-    overflow: scroll;
+    overflow-y: scroll;
   }
 </style>
