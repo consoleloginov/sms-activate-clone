@@ -10,11 +10,11 @@
   <div>
     <template v-if="!selectedItem">
       <div class="CatalogHeader">
-        <CatalogSearchInput v-model="search" class="mb-1.5" />
+        <CatalogSearchInput v-model="search" class="mb-2.5" />
 
-        <span class="flex w-full justify-center text-xs">
+        <span class="flex w-full justify-center text-xs/5">
           He нашли то что нужно?&nbsp;
-          <span class="text-blue-500 font-600 underline underline-offset-2 cursor-pointer">
+          <span class="text-blue-500 font-600 hover:underline underline-offset-2 cursor-pointer">
             Предложите
           </span>
         </span>

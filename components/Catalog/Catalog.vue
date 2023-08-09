@@ -20,6 +20,6 @@
     display: flex;
     flex-flow: column;
 
-    @apply text-base font-inter;
+    @apply text-sm font-inter;
   }
 </style>
