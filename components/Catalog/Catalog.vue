@@ -1,19 +1,17 @@
 <script setup lang="ts">
-  import {useCatalogCommonStore} from '@/stores/CatalogStore'
+  import {useCatalogStore} from './stores'
 
-  let {selectedItem} = $(useCatalogCommonStore())
+  let {selectedItem} = $(useCatalogStore())
 </script>
 
 <template>
   <div class="Catalog">
-    <CatalogHeader />
-
-    <CatalogItems v-if="!selectedItem"/>
-    <CatalogCountries v-else />
+    <CatalogSelectedItemPage v-if="selectedItem" />
+    <CatalogHomePage v-else />
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
   .Catalog {
     width: 320px;
     max-height: 100vh;

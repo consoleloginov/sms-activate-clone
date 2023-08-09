@@ -1,9 +1,9 @@
 import {defineStore, acceptHMRUpdate} from 'pinia'
 
-import type {Item} from './types'
+import type {CatalogItem} from '../types'
 
 export const useCatalogItemsStore = defineStore('CatalogItems', () => {
-  let items = $ref<Item[]>()
+  let items = $ref<CatalogItem[]>()
 
   let search = $ref('')
 

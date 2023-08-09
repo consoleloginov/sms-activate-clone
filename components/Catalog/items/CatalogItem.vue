@@ -1,18 +1,21 @@
 <script setup lang="ts">
-  import type {Item} from '@/stores/CatalogStore'
+  import {useCatalogStore} from '../stores'
+  import type {CatalogItem} from '../types'
 
-  type Props = Item
+  let {selectedItem} = $(useCatalogStore())
+
+  const item = defineProps<CatalogItem>()
 
   const {
     id,
     name,
     minPrice,
     logo_url,
-  } = defineProps<Props>()
+  } = item
 </script>
 
 <template>
-  <div class="CatalogItem">
+  <div class="CatalogItem" v-on:click="selectedItem = item">
     <img class="CatalogItem-logo" v-bind:src="logo_url" />
     <div class="grow">
       <div class="CatalogItem-name">{{ name }}</div>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import type {CountryItem} from '@/stores/CatalogStore'
+  import type {CatalogCountryItem} from '../types'
 
-  type Props = CountryItem
+  const country = defineProps<CatalogCountryItem>()
 
   const {
     id,
@@ -9,7 +9,7 @@
     price,
     quantity,
     flag_url,
-  } = defineProps<Props>()
+  } = country
 </script>
 
 <template>

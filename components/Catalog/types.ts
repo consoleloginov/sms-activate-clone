@@ -1,11 +1,11 @@
-export type Item = {
+export type CatalogItem = {
   id: string
   name: string
   minPrice: number
   logo_url: string
 }
 
-export type CountryItem = {
+export type CatalogCountryItem = {
   id: string
   name: string
   price: number

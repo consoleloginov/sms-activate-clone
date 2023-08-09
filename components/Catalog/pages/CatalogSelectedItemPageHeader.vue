@@ -1,10 +1,7 @@
 <script setup lang="ts">
-  import {
-    useCatalogCommonStore,
-    useCatalogCountriesStore,
-  } from '@/stores/CatalogStore'
+  import {useCatalogStore, useCatalogCountriesStore} from '../stores'
 
-  let {selectedItem} = $(useCatalogCommonStore())
+  let {selectedItem} = $(useCatalogStore())
 
   let {
     search,
@@ -18,19 +15,19 @@
 </script>
 
 <template>
-  <div class="CatalogCountriesHeader">
+  <div class="CatalogSelectedItemPageHeader">
     <div class="flex items-center gap-2 mb-2.5">
       <div class="relative">
         <img
-          class="CatalogCountriesHeader-selectedItem-logo"
+          class="CatalogSelectedItemPageHeader-logo"
           v-bind:src="selectedItem!.logo_url"
         />
         <button
-          class="CatalogCountriesHeader-gobackButton"
-          v-on:click="selectedItem = null"
+          class="CatalogSelectedItemPageHeader-gobackButton"
+          v-on:click="selectedItem = undefined"
         >
           <Icon
-            class="CatalogCountriesHeader-gobackButton-icon"
+            class="CatalogSelectedItemPageHeader-gobackButton-icon"
             name="bx:left-arrow-alt"
             width="24px"
             height="24px"
@@ -41,18 +38,18 @@
       <CatalogSearchInput v-model="search" />
     </div>
 
-    <div class="CatalogCountriesHeader-sorting">
-      <div class="CatalogCountriesHeader-sorting-label">Сортировать по:</div>
+    <div class="CatalogSelectedItemPageHeader-sorting">
+      <div class="CatalogSelectedItemPageHeader-sorting-label">Сортировать по:</div>
       <div class="flex gap-2">
         <button
-          class="CatalogCountriesHeader-sorting-control"
+          class="CatalogSelectedItemPageHeader-sorting-control"
           v-bind:class="{active: sortBy === 'price'}"
           v-on:click="handleSortingControls('price')"
         >
           Цене
         </button>
         <button
-          class="CatalogCountriesHeader-sorting-control"
+          class="CatalogSelectedItemPageHeader-sorting-control"
           v-bind:class="{active: sortBy === 'quantity'}"
           v-on:click="handleSortingControls('quantity')"
         >
@@ -64,18 +61,18 @@
 </template>
 
 <style lang="scss">
-  .CatalogCountriesHeader {
+  .CatalogSelectedItemPageHeader {
     padding: 16px 24px 10px 24px;
   }
 
-  .CatalogCountriesHeader-selectedItem-logo {
+  .CatalogSelectedItemPageHeader-logo {
     min-width: 36px;
     height: 36px;
     margin: 0 2px;
     border-radius: 9999px;
   }
 
-  .CatalogCountriesHeader-gobackButton {
+  .CatalogSelectedItemPageHeader-gobackButton {
     position: absolute;
     top: 0;
     left: 2px;
@@ -88,11 +85,11 @@
     @apply bg-black/40 opacity-0 hover:opacity-100 transition-opacity;
   }
 
-  .CatalogCountriesHeader-gobackButton-icon {
+  .CatalogSelectedItemPageHeader-gobackButton-icon {
     @apply text-white;
   }
 
-  .CatalogCountriesHeader-sorting {
+  .CatalogSelectedItemPageHeader-sorting {
     width: 100%;
     display: flex;
     align-items: center;
@@ -103,7 +100,7 @@
     @apply text-xs;
   }
 
-  .CatalogCountriesHeader-sorting-control {
+  .CatalogSelectedItemPageHeader-sorting-control {
     padding: 4px 6px;
     font-weight: 600;
     line-height: 12px;
