@@ -1,8 +1,8 @@
 export type CatalogItem = {
   id: string
   name: string
-  minPrice: number
   logo_url: string
+  min_price: number
 }
 
 export type CatalogCountryItem = {

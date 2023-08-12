@@ -7,9 +7,8 @@
   const item = defineProps<CatalogItem>()
 
   const {
-    id,
     name,
-    minPrice,
+    min_price,
     logo_url,
   } = item
 </script>
@@ -21,7 +20,7 @@
       <div class="CatalogItem-name">{{ name }}</div>
     </div>
     <div class="CatalogItem-minPrice">от
-      <span class="font-semibold">{{ minPrice }} ₽</span>
+      <span class="font-semibold">{{ min_price }} ₽</span>
     </div>
   </div>
 </template>

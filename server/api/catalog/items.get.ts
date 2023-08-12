@@ -1,23 +1,8 @@
-import {omit} from 'radash'
+import {serverSupabaseClient} from '#supabase/server'
 
-import response from '@/heap/getAllServicesDesktop-response-example.json'
+export default defineEventHandler(async (event) => {
+  const supabase = await serverSupabaseClient(event)
 
-const items = response.data
-  .filter(({forward}) => !forward)
-  .map(({
-    shortName,
-    name,
-    minPrice,
-    nameSearch,
-  }) => ({
-    id: shortName,
-    name,
-    minPrice,
-    logo_url: `https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/${shortName}0.webp`,
-    _nameSearch: nameSearch,
-  }))
-
-export default defineEventHandler((event) => {
   const queryParams = getQuery(event)
 
   let {offset, limit} = queryParams
@@ -25,15 +10,17 @@ export default defineEventHandler((event) => {
   offset = offset ? parseInt(offset as string) : 0
   limit = limit ? parseInt(limit as string) : 50
 
+  const from = offset
+  const to = offset + limit
+
   const searchQuery = queryParams.search as string ?? ''
 
-  let result = items
+  const {data} = await supabase
+    .from('items')
+    .select('*')
+    .order('priority')
+    .like('keywords', `%${searchQuery}%`)
+    .range(from, to)
 
-  if (searchQuery) {
-    result = result.filter(({_nameSearch}) => _nameSearch.includes(searchQuery))
-  }
-
-  return result
-    .slice(offset, offset + limit)
-    .map((item) => omit(item, ['_nameSearch']))
+  return data
 })
