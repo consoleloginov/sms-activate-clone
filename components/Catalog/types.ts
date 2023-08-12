@@ -3,6 +3,7 @@ export type CatalogItem = {
   name: string
   logo_url: string
   min_price: number
+  in_favorites?: boolean
 }
 
 export type CatalogCountryItem = {

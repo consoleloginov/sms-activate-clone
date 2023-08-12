@@ -18,7 +18,7 @@ export const useCatalogItemsStore = defineStore('CatalogItems', () => {
       query: {search, offset}
     })
 
-    items!.push(...moreItems)
+    items!.push(...moreItems!)
   }
 
   watchThrottled($$(search), async () => {
