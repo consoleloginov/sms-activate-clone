@@ -9,6 +9,36 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      countries: {
+        Row: {
+          flag_url: string | null
+          id: string
+          keywords: string | null
+          name: string | null
+          price: number | null
+          priority: number | null
+          quantity: number | null
+        }
+        Insert: {
+          flag_url?: string | null
+          id?: string
+          keywords?: string | null
+          name?: string | null
+          price?: number | null
+          priority?: number | null
+          quantity?: number | null
+        }
+        Update: {
+          flag_url?: string | null
+          id?: string
+          keywords?: string | null
+          name?: string | null
+          price?: number | null
+          priority?: number | null
+          quantity?: number | null
+        }
+        Relationships: []
+      }
       favorite_items: {
         Row: {
           id: string
@@ -42,6 +72,7 @@ export interface Database {
           min_price: number | null
           name: string | null
           priority: number | null
+          slug: string | null
         }
         Insert: {
           id?: string
@@ -50,6 +81,7 @@ export interface Database {
           min_price?: number | null
           name?: string | null
           priority?: number | null
+          slug?: string | null
         }
         Update: {
           id?: string
@@ -58,6 +90,7 @@ export interface Database {
           min_price?: number | null
           name?: string | null
           priority?: number | null
+          slug?: string | null
         }
         Relationships: []
       }
