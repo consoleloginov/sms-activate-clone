@@ -15,27 +15,21 @@ export interface Database {
           id: string
           keywords: string | null
           name: string | null
-          price: number | null
-          priority: number | null
-          quantity: number | null
+          old_id: string | null
         }
         Insert: {
           flag_url?: string | null
           id?: string
           keywords?: string | null
           name?: string | null
-          price?: number | null
-          priority?: number | null
-          quantity?: number | null
+          old_id?: string | null
         }
         Update: {
           flag_url?: string | null
           id?: string
           keywords?: string | null
           name?: string | null
-          price?: number | null
-          priority?: number | null
-          quantity?: number | null
+          old_id?: string | null
         }
         Relationships: []
       }
@@ -60,6 +54,12 @@ export interface Database {
             foreignKeyName: "favorite_items_item_id_fkey"
             columns: ["item_id"]
             referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "favorite_items_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
@@ -93,6 +93,46 @@ export interface Database {
           slug?: string | null
         }
         Relationships: []
+      }
+      pairs: {
+        Row: {
+          country_id: string | null
+          id: number
+          item_id: string | null
+          price: number | null
+          priority: number | null
+          quantity: number | null
+        }
+        Insert: {
+          country_id?: string | null
+          id?: number
+          item_id?: string | null
+          price?: number | null
+          priority?: number | null
+          quantity?: number | null
+        }
+        Update: {
+          country_id?: string | null
+          id?: number
+          item_id?: string | null
+          price?: number | null
+          priority?: number | null
+          quantity?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pairs_country_id_fkey"
+            columns: ["country_id"]
+            referencedRelation: "countries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pairs_item_id_fkey"
+            columns: ["item_id"]
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {

@@ -1,8 +1,15 @@
 import {defineStore, acceptHMRUpdate} from 'pinia'
 
+import {useCatalogStore} from './CatalogStore'
 import type {CatalogCountryItem} from '../types'
 
 export const useCatalogCountriesStore = defineStore('CatalogCountries', () => {
+  let {selectedItem} = $(useCatalogStore())
+
+  const url = $computed(() => (
+    selectedItem?.slug && `/api/catalog/${selectedItem?.slug}/countries`
+  ))
+
   let countries = $ref<CatalogCountryItem[]>()
 
   let search = $ref('')
@@ -10,29 +17,37 @@ export const useCatalogCountriesStore = defineStore('CatalogCountries', () => {
   let sortBy = $ref<'price' | 'quantity'>()
 
   const loadCountries = async () => {
-    countries = await $fetch('/api/catalog/countries')
+    if (url) {
+      countries = await $fetch(url)
+    }
   }
 
   const loadMoreCountries = async () => {
     const offset = countries?.length
 
-    const moreCountries = await $fetch('/api/catalog/countries', {
-      query: {search, sortBy, offset}
-    })
+    if (url) {
+      const moreCountries = await $fetch(url, {
+        query: {search, sortBy, offset}
+      })
 
-    countries!.push(...moreCountries)
+      countries!.push(...moreCountries as [])
+    }
   }
 
   watch($$(sortBy), async () => {
-    countries = await $fetch('/api/catalog/countries', {
-      query: {search, sortBy}
-    })
+    if (url) {
+      countries = await $fetch(url, {
+        query: {search, sortBy}
+      })
+    }
   })
 
   watchThrottled($$(search), async () => {
-    countries = await $fetch('/api/catalog/countries', {
-      query: {search, sortBy}
-    })
+    if (url) {
+      countries = await $fetch(url, {
+        query: {search, sortBy}
+      })
+    }
   }, {throttle: 1500})
 
   return $$({
