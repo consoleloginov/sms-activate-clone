@@ -46,6 +46,7 @@ export default defineEventHandler(async (event) => {
     .from('items')
     .select('*')
     .not('id', 'in', `(${favorite_items_ids.toString()})`)
+    .order('priority')
     .limit(limit - favorite_items.length)
 
   return [
