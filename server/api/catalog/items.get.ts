@@ -37,6 +37,7 @@ export default defineEventHandler(async (event) => {
       .range(from, to)
 
     return items!.map((item) => ({
+      __typename: 'CatalogItem',
       ...item,
       in_favorites: favorite_items_ids.includes(item.id),
     }))
@@ -53,6 +54,7 @@ export default defineEventHandler(async (event) => {
     ...favorite_items,
     ...other_items!,
   ].map((item) => ({
+    __typename: 'CatalogItem',
     ...item,
     in_favorites: favorite_items_ids.includes(item.id),
   }))

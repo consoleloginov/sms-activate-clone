@@ -33,21 +33,46 @@ export interface Database {
         }
         Relationships: []
       }
-      favorite_items: {
+      favorite_countries: {
         Row: {
-          id: string
-          item_id: string | null
-          user_id: string | null
+          country_id: string
+          user_id: string
         }
         Insert: {
-          id?: string
-          item_id?: string | null
-          user_id?: string | null
+          country_id: string
+          user_id: string
         }
         Update: {
-          id?: string
-          item_id?: string | null
-          user_id?: string | null
+          country_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorite_countries_country_id_fkey"
+            columns: ["country_id"]
+            referencedRelation: "countries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "favorite_countries_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      favorite_items: {
+        Row: {
+          item_id: string
+          user_id: string
+        }
+        Insert: {
+          item_id: string
+          user_id: string
+        }
+        Update: {
+          item_id?: string
+          user_id?: string
         }
         Relationships: [
           {

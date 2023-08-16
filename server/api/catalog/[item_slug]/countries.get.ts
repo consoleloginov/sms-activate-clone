@@ -1,6 +1,10 @@
 import {serverSupabaseClient} from '#supabase/server'
 import type {Database} from '@/supabase/types'
 
+import {omit} from 'radash'
+
+const user_id = process.env.USER_ID
+
 export default defineEventHandler(async (event) => {
   const supabase = await serverSupabaseClient<Database>(event)
 
@@ -28,27 +32,35 @@ export default defineEventHandler(async (event) => {
     .single()
 
   if (item) {
-    const {data} = await supabase
+    const {data: favorite_countries_data} = await supabase
+      .from('favorite_countries')
+      .select('country:countries(*)')
+      .eq('user_id', user_id)
+
+    const favorite_countries = favorite_countries_data!.map(({country}) => country!)
+    const favorite_countries_ids = favorite_countries.map((country) => country.id)
+
+    const {data: pairs} = await supabase
       .from('pairs')
       .select(`
         price,
         quantity,
         priority,
-        country:country_id(
-          name,
-          flag_url,
-          keywords
-        )
+        country:countries(*)
       `)
       .eq('item_id', item.id)
-      .order(sortBy, { ascending: sortBy !== 'quantity'})
-      .like('country.keywords', `%${searchQuery}%`)
+      .order(sortBy, {ascending: sortBy !== 'quantity'})
+      // .like('countries.keywords', `%${searchQuery}%`)
       .range(from, to)
 
-    return data?.map((pair) => ({
-      ...pair,
+    const countries = pairs!.map((pair) => ({
+      __typename: 'CatalogCountryItem',
       ...pair.country,
-    }))
+      ...pair,
+      in_favorites: favorite_countries_ids.includes(pair.country!.id),
+    })).map((country) => omit(country, ['country']))
+
+    return countries
   }
 
   return 'not found'

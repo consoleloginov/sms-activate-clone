@@ -6,27 +6,57 @@ const router = createRouter()
 
 const user_id = process.env.USER_ID
 
-router.post('/add', defineEventHandler(async (event) => {
+// * FAVORITES/ITEMS
+
+router.post('/items/add', defineEventHandler(async (event) => {
   const supabase = await serverSupabaseClient<Database>(event)
 
-  const {item_id} = await readBody<{item_id: string}>(event)
+  const {id} = await readBody<{id: string}>(event)
 
   const {error} = await supabase
     .from('favorite_items')
-    .insert({item_id, user_id})
+    .insert({item_id: id, user_id})
 
   if (error) console.log(error)
 }))
 
-router.post('/delete', defineEventHandler(async (event) => {
+router.post('/items/delete', defineEventHandler(async (event) => {
   const supabase = await serverSupabaseClient<Database>(event)
 
-  const {item_id} = await readBody<{item_id: string}>(event)
+  const {id} = await readBody<{id: string}>(event)
 
   const {error} = await supabase
     .from('favorite_items')
     .delete()
-    .eq('item_id', item_id)
+    .eq('item_id', id)
+    .eq('user_id', user_id)
+
+  if (error) console.log(error)
+}))
+
+// * FAVORITES/COUNTRIES
+
+router.post('/countries/add', defineEventHandler(async (event) => {
+  const supabase = await serverSupabaseClient<Database>(event)
+
+  const {id} = await readBody<{id: string}>(event)
+
+  const {error} = await supabase
+    .from('favorite_countries')
+    .insert({country_id: id, user_id})
+
+  if (error) console.log(error)
+}))
+
+router.post('/items/delete', defineEventHandler(async (event) => {
+  const supabase = await serverSupabaseClient<Database>(event)
+
+  const {id} = await readBody<{id: string}>(event)
+
+  const {error} = await supabase
+    .from('favorite_countries')
+    .delete()
+    .eq('country_id', id)
     .eq('user_id', user_id)
 
   if (error) console.log(error)

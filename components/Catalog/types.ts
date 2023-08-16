@@ -1,4 +1,5 @@
 export type CatalogItem = {
+  __typename: 'CatalogItem'
   id: string
   slug?: string
   name: string
@@ -8,9 +9,11 @@ export type CatalogItem = {
 }
 
 export type CatalogCountryItem = {
+  __typename: 'CatalogCountryItem'
   id: string
   name: string
   price: number
   quantity: number
   flag_url: string
+  in_favorites?: boolean
 }
