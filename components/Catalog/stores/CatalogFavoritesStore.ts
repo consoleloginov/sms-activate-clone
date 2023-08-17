@@ -1,32 +1,32 @@
 import {defineStore, acceptHMRUpdate} from 'pinia'
 
-import type {CatalogItem, CatalogCountryItem} from '../types'
+import type {CatalogItem, CatalogCountry} from '../types'
 
 export const useCatalogFavoritesStore = defineStore('CatalogFavorites', () => {
-  const add = async (item: CatalogItem | CatalogCountryItem) => {
+  const add = async (entity: CatalogItem | CatalogCountry) => {
     const url = `/api/catalog/favorites/${
-      item.__typename === 'CatalogItem' && 'items' ||
-      item.__typename === 'CatalogCountryItem' && 'countries'
+      entity.__typename === 'CatalogItem' && 'items' ||
+      entity.__typename === 'CatalogCountry' && 'countries'
     }/add`
 
     $fetch(url, {
       method: 'post',
       body: {
-        id: item.id
+        id: entity.id
       }
     })
   }
 
-  const remove = async (item: CatalogItem | CatalogCountryItem) => {
+  const remove = async (entity: CatalogItem | CatalogCountry) => {
     const url = `/api/catalog/favorites/${
-      item.__typename === 'CatalogItem' && 'items' ||
-      item.__typename === 'CatalogCountryItem' && 'countries'
+      entity.__typename === 'CatalogItem' && 'items' ||
+      entity.__typename === 'CatalogCountry' && 'countries'
     }/delete`
 
     $fetch(url, {
       method: 'post',
       body: {
-        id: item.id
+        id: entity.id
       }
     })
   }

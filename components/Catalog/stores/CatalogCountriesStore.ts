@@ -1,7 +1,7 @@
 import {defineStore, acceptHMRUpdate} from 'pinia'
 
 import {useCatalogStore} from './CatalogStore'
-import type {CatalogCountryItem} from '../types'
+import type {CatalogCountry} from '../types'
 
 export const useCatalogCountriesStore = defineStore('CatalogCountries', () => {
   let {selectedItem} = $(useCatalogStore())
@@ -10,7 +10,7 @@ export const useCatalogCountriesStore = defineStore('CatalogCountries', () => {
     selectedItem?.slug && `/api/catalog/${selectedItem?.slug}/countries`
   ))
 
-  let countries = $ref<CatalogCountryItem[]>()
+  let countries = $ref<CatalogCountry[]>()
 
   let search = $ref('')
 

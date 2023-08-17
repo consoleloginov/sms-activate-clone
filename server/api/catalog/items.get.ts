@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
     return items!.map((item) => ({
       __typename: 'CatalogItem',
       ...item,
-      in_favorites: favorite_items_ids.includes(item.id),
+      favorites: favorite_items_ids.includes(item.id),
     }))
   }
 
@@ -56,6 +56,6 @@ export default defineEventHandler(async (event) => {
   ].map((item) => ({
     __typename: 'CatalogItem',
     ...item,
-    in_favorites: favorite_items_ids.includes(item.id),
+    favorites: favorite_items_ids.includes(item.id),
   }))
 })

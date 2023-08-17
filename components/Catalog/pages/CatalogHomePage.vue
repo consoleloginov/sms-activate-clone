@@ -23,10 +23,11 @@
       <CatalogHomePageHeader />
 
       <div class="CatalogHomePage-items" v-if="items">
-        <CatalogItem
+        <CatalogItemEntity
           v-for="item of items"
           v-bind:key="item.id"
           v-bind="item"
+          showToggleIsFavorite
         />
       </div>
     </div>

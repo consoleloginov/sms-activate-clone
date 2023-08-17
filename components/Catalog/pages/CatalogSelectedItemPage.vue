@@ -23,10 +23,11 @@
       <CatalogSelectedItemPageHeader />
 
       <div class="CatalogSelectedItemPage-countries" v-if="countries">
-        <CatalogCountryItem
+        <CatalogCountryEntity
           v-for="country of countries"
           v-bind:key="country.id"
           v-bind="country"
+          showToggleIsFavorite
         />
       </div>
     </div>

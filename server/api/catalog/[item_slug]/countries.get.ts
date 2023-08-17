@@ -57,7 +57,7 @@ export default defineEventHandler(async (event) => {
       __typename: 'CatalogCountryItem',
       ...pair.country,
       ...pair,
-      in_favorites: favorite_countries_ids.includes(pair.country!.id),
+      favorite: favorite_countries_ids.includes(pair.country!.id),
     })).map((country) => omit(country, ['country']))
 
     return countries
