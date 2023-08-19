@@ -15,4 +15,8 @@
     display: grid;
     justify-content: center;
   }
+
+  .Catalog {
+    height: 100vh;
+  }
 </style>

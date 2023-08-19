@@ -1,12 +1,12 @@
 <script setup lang="ts">
-  import {useCatalogItemsStore} from '../stores'
+  import {useCatalogAllItemsPageStore} from './useCatalogAllItemsPageStore'
 
-  const itemsStore = useCatalogItemsStore()
+  const store = useCatalogAllItemsPageStore()
   const {
     items,
     loadItems,
     loadMoreItems,
-  } = $(itemsStore)
+  } = $(store)
 
   loadItems()
 
@@ -18,11 +18,11 @@
 </script>
 
 <template>
-  <div class="CatalogHomePage">
-    <div class="CatalogHomePage-scrollContainer" ref="scrollContainer">
-      <CatalogHomePageHeader />
+  <div class="CatalogAllItemsPage">
+    <div class="CatalogAllItemsPage-scrollContainer" ref="scrollContainer">
+      <CatalogAllItemsPageHeader />
 
-      <div class="CatalogHomePage-items" v-if="items">
+      <div class="CatalogAllItemsPage-items" v-if="items">
         <CatalogItemEntity
           v-for="item of items"
           v-bind:key="item.id"
@@ -35,11 +35,11 @@
 </template>
 
 <style lang="scss">
-  .CatalogHomePage {
+  .CatalogAllItemsPage {
     height: 100%;
   }
 
-  .CatalogHomePage-scrollContainer {
+  .CatalogAllItemsPage-scrollContainer {
     height: 100%;
     overflow-y: scroll;
   }

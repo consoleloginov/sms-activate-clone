@@ -1,13 +1,15 @@
 <script setup lang="ts">
   import {useCatalogStore} from './stores'
 
-  let {selectedItem} = $(useCatalogStore())
+  let {route} = $(useCatalogStore())
 </script>
 
 <template>
   <div class="Catalog">
-    <CatalogSelectedItemPage v-if="selectedItem" />
-    <CatalogHomePage v-else />
+    <CatalogHomePage v-if="route === '/'" />
+    <CatalogAllItemsPage v-if="route === '/items'" />
+    <CatalogAllCountriesPage v-if="route === '/countries'" />
+    <!-- <CatalogSelectedItemPage v-if="route === '/:slug/countries'" /> -->
   </div>
 </template>
 

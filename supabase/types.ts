@@ -16,6 +16,7 @@ export interface Database {
           keywords: string | null
           name: string | null
           old_id: string | null
+          priority: number
         }
         Insert: {
           flag_url?: string | null
@@ -23,6 +24,7 @@ export interface Database {
           keywords?: string | null
           name?: string | null
           old_id?: string | null
+          priority?: number
         }
         Update: {
           flag_url?: string | null
@@ -30,6 +32,7 @@ export interface Database {
           keywords?: string | null
           name?: string | null
           old_id?: string | null
+          priority?: number
         }
         Relationships: []
       }

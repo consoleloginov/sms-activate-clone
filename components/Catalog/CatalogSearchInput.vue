@@ -7,7 +7,7 @@
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative w-full">
     <input
       class="CatalogSearchInput"
       type="search"

@@ -25,6 +25,7 @@
 
 <template>
   <div class="CatalogItemEntity" v-on:click="selectedItem = item">
+    <CatalogToggleIsFavorite v-if="showToggleIsFavorite" />
 
     <img class="CatalogItemEntity-logo" v-if="logo_url" v-bind:src="logo_url" />
     <div class="CatalogItemEntity-logoPlaceholder" v-else></div>
@@ -38,14 +39,12 @@
         v-if="quantity"
       >{{quantity}} шт</div>
     </div>
-
-    <CatalogToggleIsFavorite v-if="showToggleIsFavorite" />
   </div>
 </template>
 
 <style lang="scss">
   .CatalogItemEntity {
-    padding: 12px 24px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
     gap: 8px;

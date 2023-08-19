@@ -1,18 +1,18 @@
 export type CatalogItem = {
-  __typename: 'CatalogItem'
+  __typename: string
   id: string
-  slug?: string
-  name?: string
-  logo_url?: string
-  quantity?: number
+  slug?: string | null
+  name?: string | null
+  logo_url?: string | null
+  quantity?: number | null
   favorite?: boolean
 }
 
 export type CatalogCountry = {
-  __typename: 'CatalogCountry'
+  __typename: string
   id: string
-  name?: string
-  flag_url?: string
-  quantity?: number
+  name?: string | null
+  flag_url?: string | null
+  quantity?: number | null
   favorite?: boolean
 }

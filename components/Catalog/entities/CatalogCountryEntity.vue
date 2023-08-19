@@ -25,6 +25,7 @@
 
 <template>
   <div class="CatalogCountryEntity" v-on:click="">
+    <CatalogToggleIsFavorite v-if="showToggleIsFavorite" />
 
     <img class="CatalogCountryEntity-flag" v-if="flag_url" v-bind:src="flag_url" />
     <div class="CatalogCountryEntity-flagPlaceholder" v-else></div>
@@ -38,14 +39,12 @@
         v-if="quantity"
       >{{quantity}} шт</div>
     </div>
-
-    <CatalogToggleIsFavorite v-if="showToggleIsFavorite" />
   </div>
 </template>
 
 <style lang="scss">
   .CatalogCountryEntity {
-    padding: 12px 24px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
     gap: 8px;
