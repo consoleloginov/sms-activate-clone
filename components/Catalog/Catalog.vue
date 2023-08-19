@@ -9,7 +9,7 @@
     <CatalogHomePage v-if="route === '/'" />
     <CatalogAllItemsPage v-if="route === '/items'" />
     <CatalogAllCountriesPage v-if="route === '/countries'" />
-    <!-- <CatalogSelectedItemPage v-if="route === '/:slug/countries'" /> -->
+    <CatalogItemCountriesPage v-if="route === '/:slug/countries'" />
   </div>
 </template>
 

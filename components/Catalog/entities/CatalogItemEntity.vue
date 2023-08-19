@@ -6,7 +6,7 @@
     showToggleIsFavorite?: boolean
   }
 
-  let {selectedItem} = $(useCatalogStore())
+  let {route, selectedItem} = $(useCatalogStore())
 
   const item = defineProps<CatalogItemEntityProps>()
   const {
@@ -21,10 +21,15 @@
   //   if (isFavorite) favorites.add(item)
   //   else favorites.delete(item)
   // })
+
+  const onClick = () => {
+    selectedItem = item
+    route = '/:slug/countries'
+  }
 </script>
 
 <template>
-  <div class="CatalogItemEntity" v-on:click="selectedItem = item">
+  <div class="CatalogItemEntity" v-on:click="onClick">
     <CatalogToggleIsFavorite v-if="showToggleIsFavorite" />
 
     <img class="CatalogItemEntity-logo" v-if="logo_url" v-bind:src="logo_url" />

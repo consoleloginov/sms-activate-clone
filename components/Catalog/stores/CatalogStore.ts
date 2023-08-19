@@ -6,7 +6,7 @@ export type CatalogRoute =
   | '/'
   | '/items'
   | '/countries'
-  // | '/items/:slug/countries'
+  | '/:slug/countries'
   // | '/countries/:slug/items'
 
 
