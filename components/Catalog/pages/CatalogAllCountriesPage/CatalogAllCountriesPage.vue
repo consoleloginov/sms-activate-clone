@@ -23,7 +23,7 @@
       <CatalogAllCountriesPageHeader />
 
       <div class="CatalogAllCountriesPage-countries" v-if="countries">
-        <CatalogCountryEntity
+        <CatalogCountry
           v-for="country of countries"
           v-bind:key="country.id"
           v-bind="country"

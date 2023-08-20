@@ -1,46 +1,43 @@
 <script setup lang="ts">
-  import {useCatalogStore} from '../stores'
-  import {type CatalogItem} from '../types'
+  import {useCatalogFavoritesCUD} from '../useCatalogFavoritesCUD'
+  import type {CatalogItem} from '../types'
 
-  type CatalogItemEntityProps = CatalogItem & {
+  type Props = CatalogItem & {
     showToggleIsFavorite?: boolean
   }
 
-  let {route, selectedItem} = $(useCatalogStore())
+  const favoritesCUD = useCatalogFavoritesCUD()
 
-  const item = defineProps<CatalogItemEntityProps>()
+  const {
+    showToggleIsFavorite,
+    ...item
+  } = defineProps<Props>()
   const {
     name,
     logo_url,
     quantity,
     favorite,
-    showToggleIsFavorite,
   } = item
 
   // watch($$(isFavorite), () => {
-  //   if (isFavorite) favorites.add(item)
-  //   else favorites.delete(item)
+  //   if (isFavorite) favoritesCUD.add(item)
+  //   else favoritesCUD.del(item)
   // })
-
-  const onClick = () => {
-    selectedItem = item
-    route = '/:slug/countries'
-  }
 </script>
 
 <template>
-  <div class="CatalogItemEntity" v-on:click="onClick">
+  <div class="CatalogItem">
     <CatalogToggleIsFavorite v-if="showToggleIsFavorite" />
 
-    <img class="CatalogItemEntity-logo" v-if="logo_url" v-bind:src="logo_url" />
-    <div class="CatalogItemEntity-logoPlaceholder" v-else></div>
+    <img class="CatalogItem-logo" v-if="logo_url" v-bind:src="logo_url" />
+    <div class="CatalogItem-logoPlaceholder" v-else></div>
 
     <div class="grow">
-      <div class="CatalogItemEntity-name"
+      <div class="CatalogItem-name"
         v-bind:class="{'text-base': !quantity}"
       >{{name}}</div>
 
-      <div class="CatalogItemEntity-quantity"
+      <div class="CatalogItem-quantity"
         v-if="quantity"
       >{{quantity}} шт</div>
     </div>
@@ -48,7 +45,7 @@
 </template>
 
 <style lang="scss">
-  .CatalogItemEntity {
+  .CatalogItem {
     padding: 12px 16px;
     display: flex;
     align-items: center;
@@ -62,8 +59,8 @@
     }
   }
 
-  .CatalogItemEntity-logo,
-  .CatalogItemEntity-logoPlaceholder {
+  .CatalogItem-logo,
+  .CatalogItem-logoPlaceholder {
     width: 36px;
     height: 36px;
     margin: 0 2px;
@@ -73,11 +70,11 @@
     @apply shadow;
   }
 
-  .CatalogItemEntity-name {
+  .CatalogItem-name {
     font-weight: 600;
   }
 
-  .CatalogItemEntity-quantity {
+  .CatalogItem-quantity {
     font-size: 12px;
     line-height: 16px;
   }

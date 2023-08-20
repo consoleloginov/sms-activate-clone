@@ -1,13 +1,13 @@
 import {defineStore, acceptHMRUpdate} from 'pinia'
 
-import {useCatalogStore} from '../../stores/CatalogStore'
+import {useCatalogChosenElements} from '../../useCatalogChosenElements'
 import type {CatalogCountry} from '../../types'
 
 export const useCatalogItemCountriesPageStore = defineStore('CatalogItemCountriesPage', () => {
-  let {selectedItem} = $(useCatalogStore())
+  let {chosenItem} = $(useCatalogChosenElements())
 
   const url = $computed(() => (
-    selectedItem?.slug && `/api/catalog/${selectedItem.slug}/countries`
+    `/api/catalog/${chosenItem?.slug}/countries`
   )) as `/api/catalog/${string}/countries`
 
   let countries = $ref<CatalogCountry[]>()

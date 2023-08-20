@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import {useCatalogItemCountriesPageStore} from './useCatalogItemCountriesPageStore'
-  import {useCatalogStore} from '../../stores'
+  import {useCatalogRouter} from '../../CatalogRouter/useCatalogRouter'
 
-  let {route} = $(useCatalogStore())
+  let {route} = $(useCatalogRouter())
 </script>
 
 <template>

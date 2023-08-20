@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import {useCatalogStore} from '../../stores'
+  import {useCatalogRouter} from '../../CatalogRouter/useCatalogRouter'
 
-  let {route} = $(useCatalogStore())
+  let {route} = $(useCatalogRouter())
 </script>
 
 <template>

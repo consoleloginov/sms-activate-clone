@@ -1,5 +1,8 @@
 <script setup lang="ts">
   import {useCatalogAllItemsPageStore} from './useCatalogAllItemsPageStore'
+  import {useCatalogChosenElements} from '../../useCatalogChosenElements'
+  import {useCatalogRouter} from '../../CatalogRouter/useCatalogRouter'
+  import type {CatalogItem} from '../../types'
 
   const store = useCatalogAllItemsPageStore()
   const {
@@ -15,6 +18,14 @@
   useInfiniteScroll(scrollContainer, async () => {
     await loadMoreItems()
   })
+
+  let {chosenItem} = $(useCatalogChosenElements())
+  let {route} = $(useCatalogRouter())
+
+  const onItemClicked = (item: CatalogItem) => {
+    chosenItem = item
+    route = '/:slug/countries'
+  }
 </script>
 
 <template>
@@ -23,11 +34,12 @@
       <CatalogAllItemsPageHeader />
 
       <div class="CatalogAllItemsPage-items" v-if="items">
-        <CatalogItemEntity
+        <CatalogItem
           v-for="item of items"
           v-bind:key="item.id"
           v-bind="item"
           showToggleIsFavorite
+          v-on:click="onItemClicked(item)"
         />
       </div>
     </div>
