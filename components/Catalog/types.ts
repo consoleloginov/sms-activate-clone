@@ -13,6 +13,7 @@ export type CatalogCountry = {
   id: string
   name?: string | null
   flag_url?: string | null
+  price?: string | number
   quantity?: number | null
   favorite?: boolean
 }

@@ -29,6 +29,8 @@
           v-bind="country"
         />
       </div>
+
+      <CatalogItemCountriesPageSortingToolbar />
     </div>
   </div>
 </template>

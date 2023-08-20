@@ -12,7 +12,7 @@ export const useCatalogItemCountriesPageStore = defineStore('CatalogItemCountrie
 
   let countries = $ref<CatalogCountry[]>()
 
-  let sortBy = $ref<'price' | 'quantity'>()
+  let sortBy = $ref<'default'|'name'|'price'|'quantity'>('default')
 
   const loadCountries = async () => {
     countries = await $fetch(url)

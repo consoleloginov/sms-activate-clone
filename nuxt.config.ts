@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   components: [{path: '@/components', pathPrefix: false}],
 
   modules: [
-    '@nuxthq/ui',
+    '@nuxt/ui',
     // '@nuxtjs/google-fonts',
     '@nuxtjs/supabase',
     '@nuxtjs/tailwindcss',
@@ -16,9 +16,9 @@ export default defineNuxtConfig({
     'nuxt-icon',
   ],
 
-  ui: {
-    prefix: 'Nuxt',
-  },
+  // ui: {
+  //   prefix: 'Nuxt',
+  // },
 
   colorMode: {
     preference: 'light',

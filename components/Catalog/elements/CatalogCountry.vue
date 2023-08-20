@@ -7,6 +7,7 @@
   const {
     name,
     flag_url,
+    price,
     quantity,
   } = country
 </script>
@@ -26,6 +27,10 @@
       <div class="CatalogCountry-quantity"
         v-if="quantity"
       >{{quantity}} шт</div>
+    </div>
+
+    <div class="text-base font-600" v-if="price">
+      {{price}} ₽
     </div>
   </div>
 </template>
